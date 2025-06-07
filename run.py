@@ -18,8 +18,7 @@ def get_url():
         parsed = urlparse(href)
         # netloc + path 부분만 사용
         cleaned_url = parsed.netloc + parsed.path
-        if not cleaned_url.endswith('/'):
-            cleaned_url += '/'
+        cleaned_url = cleaned_url.rstrip('/')
         return cleaned_url
     else:
         raise ValueError("aria-label='북토끼 바로가기'인 a 태그를 찾을 수 없습니다.")
