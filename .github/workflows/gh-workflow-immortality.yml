@@ -1,0 +1,19 @@
+name: GitHub Workflow Immortality
+
+on:
+  schedule:
+    - cron: '20 0 1 * *'  # 매월 1일 09:20 (KST)
+  workflow_dispatch: {}
+
+jobs:
+  keepalive:
+    name: GitHub Workflow Immortality
+    runs-on: ubuntu-latest
+    permissions: {}
+
+    steps:
+      - name: Keep GitHub workflows alive
+        uses: PhrozenByte/gh-workflow-immortality@v1
+        with:
+          secret: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repos: ${{ github.repository }}
