@@ -1,4 +1,4 @@
-booktoki468.com##div[id*="-banner-"] > div[class*=" "] > div[class*=" "][style*=" "]
-booktoki468.com###hd_pop
-booktoki468.com##img[src^="/tokinbtoki/"]
-booktoki468.com#?#ul[class] > li:has(> a[href*="tokkiweb.com"])
+jusocon.com/bbs/board.php##div[id*="-banner-"] > div[class*=" "] > div[class*=" "][style*=" "]
+jusocon.com/bbs/board.php###hd_pop
+jusocon.com/bbs/board.php##img[src^="/tokinbtoki/"]
+jusocon.com/bbs/board.php#?#ul[class] > li:has(> a[href*="tokkiweb.com"])
