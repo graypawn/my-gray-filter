@@ -2,26 +2,23 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
-def get_url():
-    url = "https://www.xn--h10bx0wsvp.net/"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-    }
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
+def get_final_url(url: str) -> str:
+    try:
+        response = requests.get(url, allow_redirects=True, timeout=10)
+        return response.url  # 최종적으로 이동한 URL 반환
+    except requests.RequestException as e:
+        return f"Error: {e}"
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    link = soup.find('a', attrs={'aria-label': '북토끼 바로가기'})
-    if link and link.has_attr('href'):
-        # 절대 URL을 정리해서 https:// 부분 제거
-        href = link['href']
-        parsed = urlparse(href)
-        # netloc + path 부분만 사용
-        cleaned_url = parsed.netloc + parsed.path
-        cleaned_url = cleaned_url.rstrip('/')
-        return cleaned_url
-    else:
-        raise ValueError("aria-label='북토끼 바로가기'인 a 태그를 찾을 수 없습니다.")
+def get_url():
+    return clean_url(get_final_url("https://jusocon.com/bbs/link.php?bo_table=nav3&wr_id=5&no=1"))
+
+def clean_url(url):
+    parsed = urlparse(url)
+
+    # netloc + path 부분만 사용
+    cleaned_url = parsed.netloc + parsed.path
+    cleaned_url = cleaned_url.rstrip('/')
+    return cleaned_url
 
 def main():
     try:
